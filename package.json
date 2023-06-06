@@ -1,0 +1,16 @@
+{
+  "name": "petitsplats2.0",
+  "version": "1.0.0",
+  "description": "fonctionnalité de recherche",
+  "main": "index.html",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css",
+    "lint": "eslint ."
+  },
+  "author": "Linh Lou",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.21.8",
+    "eslint": "^8.42.0"
+  }
+}
