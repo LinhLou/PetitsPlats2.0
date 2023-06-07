@@ -1,4 +1,37 @@
-header{
-  background-color: red;
-  height: 500px;
+.header{
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)), url('/assets/Recette36.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 667px;
+  position: relative;
+  @include centeredBox;
+  &_logo{
+    background-color: transparent;
+    color: white;
+    font-family: $font-title;
+    font-size: 30px;
+    position: absolute;
+    top: 51px;
+    left: 69px;
+  }
+  &_title{
+    text-transform: capitalize;
+    color: white;
+    font-family: $font-title;
+    text-align: center;
+    color: $color-tertiary;
+    line-height: 66px;
+    font-size: 44px;
+  }
+  &_search{
+    margin:auto;
+    margin-top:30px;
+    padding: 10px 10px 10px 35px;
+    width: 66%;
+    height: 72px;
+    @include box;
+    border-radius: 11px;
+    @include centeredBox;
+  }
 }

@@ -1,0 +1,41 @@
+// .icon_search{
+//   @include box;
+//   border-radius: 10px;
+//   @include centeredBox;
+
+.searchBar{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap:10px;
+  &_input{
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  &_xClose{
+    font-size: 0.8rem;
+    color:$color-secondary;
+    &-principale{
+      font-size: 1.3rem;
+    }
+  }
+  &_searchIcon{
+    color:$color-secondary;
+    font-size: 20px;
+    &-principale{
+      height: 52px;
+      width: 52px;
+      border-radius: 10px;
+      @include centeredBox;
+      background-color: black;
+      color:white;
+      font-size: 25px;
+    }
+  }
+  
+}
