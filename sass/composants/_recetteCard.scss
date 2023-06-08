@@ -1,0 +1,50 @@
+
+.recetteCard{
+  @include box;
+  border-radius: 21px;
+  min-height: 731px;
+  padding:0 0 10px 0;
+  &_photo{
+    width: 100%;
+    height: 253px;
+    object-fit: cover;
+  }
+  &_title{
+    margin:32px 25px 0 25px;
+    font-size: 18px;
+    font-family: $font-title;
+  }
+  &_description{
+    margin:29px 25px 32px 25px;
+    & p{
+      margin-top:15px;
+      height: 76px;
+      overflow: hidden;
+    }
+  }
+
+  &_ingredients{
+    margin:0 25px;
+    & ul{
+      margin:15px 0 0;
+      padding:0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      row-gap: 21px;
+      column-gap: 20px;
+    }
+    & li{
+      font-size: 14px;
+      font-family: $font-base;
+      & span{
+        color:#7A7A7A;
+      }
+    }
+  }
+
+  & h3{
+    color:$color-secondary;
+    text-transform:uppercase;
+    font-size: 12px;
+  }
+}

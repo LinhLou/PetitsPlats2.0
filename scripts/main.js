@@ -1,5 +1,4 @@
 // model
-// console.log(recipes);
   const getDataForFiltre = (recipes)=>{
     const dataFiltre = recipes.reduce((acc,recipe)=>{
       // get ingredients
@@ -50,8 +49,11 @@ const displayFiltre =(dataCategory)=>{
 
   const filtreSection = document.querySelector('.filtre_section');
   const filtreCategory = document.createElement('div');
-  filtreCategory.classList.add('filtre_category');
-  
+  filtreCategory.classList.add( 'filtre_category');
+  const div = document.createElement('div');
+  div.classList.add('col-sm-10','col-md-6','col-lg-4');
+
+  div.appendChild(filtreCategory);
   // caterogy
   const nameCategory = document.createElement('div');
   nameCategory.classList.add('filtre_category_name')
@@ -77,12 +79,9 @@ const displayFiltre =(dataCategory)=>{
   divSticky.appendChild(nameCategory);
   divSticky.appendChild(searchFiltre);
   filtreCategory.appendChild(divSticky);
-
   filtreCategory.appendChild(optionsEle);
-
-  filtreSection.appendChild(filtreCategory);
+  filtreSection.appendChild(div);
 }
-
 
 const displaySearchBarPrincipale = ()=>{
   const searchBarPrincipale = createSearchBar();
@@ -96,16 +95,34 @@ const displaySearchBarPrincipale = ()=>{
   searchPrincipale.appendChild(searchBarPrincipale);
 }
 
-displaySearchBarPrincipale();
+const displayRecettes = (recipes)=>{
+  const container = document.querySelector('.recettes');
+  recipes.forEach((recette)=>{
+    const div = document.createElement('div');
+    div.classList.add('col-sm-6','col-md-4');
+    const recetteObj = new RecetteFactory(recette);
+    const recetteCard = recetteObj.createRecetteCard();
+    div.appendChild(recetteCard);
+    container.appendChild(div);
+  });
+
+}
+
+
 const initFiltre = ()=>{
   const data = getDataForFiltre(recipes);
   data.forEach(category=>displayFiltre(category));
 }
 
-initFiltre();
 
-// const displayRecipe=(recipes)=>{
-//   const divMeal = document.createElement('div');
-//   divMeal.classList.add('');
-// }
+
+
+
+
 // control
+const init = ()=>{
+  displaySearchBarPrincipale();
+  initFiltre();
+  displayRecettes(recipes);
+}
+init();
