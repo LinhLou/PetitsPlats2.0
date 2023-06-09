@@ -20,17 +20,19 @@ class RecetteFactory {
     title.innerHTML=this.name;
     const description = document.createElement('div');
     description.classList.add('recetteCard_description');
-    description.innerHTML=`<h3>recette</h3> <p>${this.description}</p>`;
+    description.innerHTML=`<h3>recette</h3> <p id="recetteDescription">${this.description}</p>`;
     const ingredient = document.createElement('div');
     ingredient.classList.add('recetteCard_ingredients');
     ingredient.innerHTML=`<h3>Ingrédients</h3> <ul> ${this.ingredients.reduce((acc,ele)=>{acc = `${acc} <li>${ele.ingredient} <br><span>${((ele)=>ele.quantity ?? ``)(ele)}${((ele)=>ele.unit ?? ``)(ele)}</span></li>`; return acc;},``)} </ul>`;
-
+    const temps = document.createElement('span');
+    temps.classList.add('recetteCard_time');
+    temps.innerHTML=`${this.time}min`;
 
     cardDomNode.appendChild(image);
     cardDomNode.appendChild(title);
     cardDomNode.appendChild(description);
     cardDomNode.appendChild(ingredient);
-
+    cardDomNode.appendChild(temps);
     return cardDomNode;
   }
 }

@@ -51,7 +51,7 @@ const displayFiltre =(dataCategory)=>{
   const filtreCategory = document.createElement('div');
   filtreCategory.classList.add( 'filtre_category');
   const div = document.createElement('div');
-  div.classList.add('col-sm-10','col-md-6','col-lg-4');
+  div.classList.add('col-sm-9','col-md-6','col-lg-4','col-xl-3');
 
   div.appendChild(filtreCategory);
   // caterogy
@@ -71,7 +71,7 @@ const displayFiltre =(dataCategory)=>{
   options.forEach((element) => {
     const liOption = document.createElement('li');
     liOption.classList.add('filtre_category_option')
-    liOption.innerHTML= `${element} <i class="fa-solid fa-xmark"></i>`;
+    liOption.innerHTML= `${element}<i class="fa-solid fa-xmark"></i>`;
     optionsEle.appendChild(liOption);
   });
   const divSticky = document.createElement('div');

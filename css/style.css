@@ -7,10 +7,15 @@
   font-family: "Manrope", sans-serif;
 }
 
+body {
+  max-width: 1440px;
+  margin: auto;
+}
+
 main {
   background-color: #E5E5E5;
   padding-top: 21px;
-  padding-bottom: 201px;
+  padding-bottom: 20px;
 }
 
 .recetteCard {
@@ -19,7 +24,22 @@ main {
   border: none;
   border-radius: 21px;
   min-height: 731px;
-  padding: 0 0 10px 0;
+  height: 100%;
+  padding: 0 0 20px 0;
+  position: relative;
+}
+.recetteCard_time {
+  position: absolute;
+  top: 21px;
+  right: 22px;
+  background-color: #FFD15B;
+  width: 65px;
+  height: 26px;
+  border-radius: 13px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .recetteCard_photo {
   width: 100%;
@@ -37,7 +57,11 @@ main {
 .recetteCard_description p {
   margin-top: 15px;
   height: 76px;
-  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+}
+.recetteCard_description p::-webkit-scrollbar {
+  display: none;
 }
 .recetteCard_ingredients {
   margin: 0 25px;
@@ -160,6 +184,10 @@ main {
   min-height: 56px;
   border-radius: 11px;
   overflow: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.filtre_category::-webkit-scrollbar {
+  display: none;
 }
 .filtre_category_sticky {
   padding: 17px 16px 10px;
@@ -182,14 +210,12 @@ main {
   height: 36px;
   border: 1px solid #7A7A7A;
   padding: 0 9px;
-  display: none;
 }
 .filtre_category_options {
   width: 100%;
   height: 100%;
   padding: 0 16px;
   margin: 0;
-  display: none;
 }
 .filtre_category_option {
   margin-top: 13px;
@@ -197,7 +223,7 @@ main {
   z-index: 1;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: first baseline;
   position: relative;
 }
 .filtre_category_option::after {

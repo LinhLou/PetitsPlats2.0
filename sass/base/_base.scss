@@ -6,10 +6,15 @@
   list-style-type: none;
   font-family: $font-base;
 }
+
+body{
+  max-width: 1440px;
+  margin:auto;
+}
 main{
   background-color: 
   #E5E5E5;
   padding-top:21px;
-  padding-bottom: 201px;
+  padding-bottom: 20px;
 }
 
