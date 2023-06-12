@@ -43,6 +43,18 @@ const createSearchBar = ()=>{
  return searchBarEle;
 }
 
+const displaySearchBarPrincipale = ()=>{
+  const searchBarPrincipale = createSearchBar();
+  searchBarPrincipale.classList.add('searchBar-principale');
+  searchBarPrincipale.querySelector('.searchBar_searchIcon').classList.add('searchBar_searchIcon-principale');
+  searchBarPrincipale.querySelector('.searchBar_xClose').classList.add('searchBar_xClose-principale');
+  const inputEle =   searchBarPrincipale.querySelector('.searchBar_input');
+  inputEle.setAttribute('placeholder','Rechercher une recette, un ingrédient...');
+
+  const searchPrincipale = document.querySelector('.header_search');
+  searchPrincipale.appendChild(searchBarPrincipale);
+}
+
 const displayFiltre =(dataCategory)=>{
   const category = Object.keys(dataCategory);
   const options = dataCategory[category];
@@ -83,17 +95,7 @@ const displayFiltre =(dataCategory)=>{
   filtreSection.appendChild(div);
 }
 
-const displaySearchBarPrincipale = ()=>{
-  const searchBarPrincipale = createSearchBar();
-  searchBarPrincipale.classList.add('searchBar-principale');
-  searchBarPrincipale.querySelector('.searchBar_searchIcon').classList.add('searchBar_searchIcon-principale');
-  searchBarPrincipale.querySelector('.searchBar_xClose').classList.add('searchBar_xClose-principale');
-  const inputEle =   searchBarPrincipale.querySelector('.searchBar_input');
-  inputEle.setAttribute('placeholder','Rechercher une recette, un ingrédient...');
 
-  const searchPrincipale = document.querySelector('.header_search');
-  searchPrincipale.appendChild(searchBarPrincipale);
-}
 
 const displayRecettes = (recipes)=>{
   const container = document.querySelector('.recettes');
@@ -109,20 +111,17 @@ const displayRecettes = (recipes)=>{
 }
 
 
-const initFiltre = ()=>{
+// control
+
+const resetFiltre = (recipes)=>{
   const data = getDataForFiltre(recipes);
   data.forEach(category=>displayFiltre(category));
 }
 
 
-
-
-
-
-// control
 const init = ()=>{
   displaySearchBarPrincipale();
-  initFiltre();
+  resetFiltre(recipes);
   displayRecettes(recipes);
 }
 init();
