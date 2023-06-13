@@ -22,29 +22,16 @@
     return dataFiltre;
   }
 
+  const updateNbrTotalResults = (data)=>{
+    const div = document.querySelector('.filtre_nbrRecettes');
+    div.innerHTML = `${data.length} recettes`;
+  }
 
 // vue
-const createSearchBar = ()=>{
-  // create elements
- const searchBarEle = document.createElement('div');
-  searchBarEle.classList.add('searchBar');
- const inputEle = document.createElement('input');
-  inputEle.classList.add('searchBar_input');
- const xCloseEle = document.createElement('span');
-  xCloseEle.classList.add('searchBar_xClose');
-  xCloseEle.innerHTML=`<i class="fa-solid fa-xmark"></i>`;
- const searchIconEle = document.createElement('span');
- searchIconEle.classList.add('searchBar_searchIcon');
- searchIconEle.innerHTML=`<i class="fa-sharp fa-solid fa-magnifying-glass">`;
-// display
- searchBarEle.appendChild(inputEle);
- searchBarEle.appendChild(xCloseEle);
- searchBarEle.appendChild(searchIconEle);
- return searchBarEle;
-}
 
 const displaySearchBarPrincipale = ()=>{
-  const searchBarPrincipale = createSearchBar();
+  const searchBarObj = new SearchBarFactory();
+  const searchBarPrincipale = searchBarObj.createSearchBar();
   searchBarPrincipale.classList.add('searchBar-principale');
   searchBarPrincipale.querySelector('.searchBar_searchIcon').classList.add('searchBar_searchIcon-principale');
   searchBarPrincipale.querySelector('.searchBar_xClose').classList.add('searchBar_xClose-principale');
@@ -55,9 +42,9 @@ const displaySearchBarPrincipale = ()=>{
   searchPrincipale.appendChild(searchBarPrincipale);
 }
 
-const displayFiltre =(dataCategory)=>{
-  const category = Object.keys(dataCategory);
-  const options = dataCategory[category];
+const displayFiltre =(dataFiltre)=>{
+  const category = Object.keys(dataFiltre);
+  const options = dataFiltre[category];
 
   const filtreSection = document.querySelector('.filtre_section');
   const filtreCategory = document.createElement('div');
@@ -72,9 +59,11 @@ const displayFiltre =(dataCategory)=>{
   nameCategory.innerHTML =`${category} <span><i class="fa-solid fa-chevron-down"></i></span>`;
 
   // search
+  const searchBarObj = new SearchBarFactory();
+  const searchBarFiltre = searchBarObj.createSearchBar();
   const searchFiltre = document.createElement('div');
   searchFiltre.classList.add('filtre_category_search');
-  searchFiltre.appendChild(createSearchBar());
+  searchFiltre.appendChild(searchBarFiltre);
 
   // options
   const optionsEle = document.createElement('ul');
@@ -88,14 +77,20 @@ const displayFiltre =(dataCategory)=>{
   });
   const divSticky = document.createElement('div');
   divSticky.classList.add('filtre_category_sticky');
+
+
+  // tag 
+  const tagEles = document.createElement('ul');
+  tagEles.classList.add('filtre_category_tags');
+  tagEles.innerHTML =`<li class="filtre_category_tag">option 1 <span><i class="fa-solid fa-xmark"></i> </span></li>`;
+
   divSticky.appendChild(nameCategory);
   divSticky.appendChild(searchFiltre);
   filtreCategory.appendChild(divSticky);
   filtreCategory.appendChild(optionsEle);
+  filtreCategory.appendChild(tagEles);
   filtreSection.appendChild(div);
 }
-
-
 
 const displayRecettes = (recipes)=>{
   const container = document.querySelector('.recettes');
@@ -123,5 +118,8 @@ const init = ()=>{
   displaySearchBarPrincipale();
   resetFiltre(recipes);
   displayRecettes(recipes);
+  updateNbrTotalResults(recipes);
 }
+
+
 init();

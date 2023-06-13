@@ -5,7 +5,7 @@ class RecetteFactory {
     this.image = recipe.image;
     this.ingredients = recipe.ingredients;
     this.description = recipe.description;
-    this.imageSource = `assets/${this.image}`;
+    this.imageSource = `assets/images_Recettes/${this.image}`;
   }
 
   createRecetteCard = ()=>{
