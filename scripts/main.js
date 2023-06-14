@@ -18,7 +18,6 @@
       })
     return acc;
     },[{Ingrédients:[]},{Appareils:[]},{Ustensiles:[]}]);
-    console.log(dataFiltre);
     return dataFiltre;
   }
 
@@ -71,7 +70,7 @@ const displayFiltre =(dataFiltre)=>{
 
   options.forEach((element) => {
     const liOption = document.createElement('li');
-    liOption.classList.add('filtre_category_option')
+    liOption.classList.add('filtre_category_option', 'filtre_category_option--visible');
     liOption.innerHTML= `${element}<i class="fa-solid fa-xmark"></i>`;
     optionsEle.appendChild(liOption);
   });
@@ -82,7 +81,7 @@ const displayFiltre =(dataFiltre)=>{
   // tag 
   const tagEles = document.createElement('ul');
   tagEles.classList.add('filtre_category_tags');
-  tagEles.innerHTML =`<li class="filtre_category_tag">option 1 <span><i class="fa-solid fa-xmark"></i> </span></li>`;
+  // tagEles.innerHTML =`<li class="filtre_category_tag">option 1 <span><i class="fa-solid fa-xmark"></i> </span></li>`;
 
   divSticky.appendChild(nameCategory);
   divSticky.appendChild(searchFiltre);
