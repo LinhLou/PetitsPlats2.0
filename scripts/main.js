@@ -1,31 +1,30 @@
 // model
-  const getDataForFiltre = (recipes)=>{
-    const dataFiltre = recipes.reduce((acc,recipe)=>{
-      // get ingredients
-      recipe.ingredients.forEach((ele)=>{
-        if(!acc[0].Ingrédients.includes(ele.ingredient)){
-          acc[0].Ingrédients = [...acc[0].Ingrédients,ele.ingredient];}
-      })
-      //  get appliances
-      if(!acc[1].Appareils.includes(recipe.appliance)){
-        acc[1].Appareils=[...acc[1].Appareils,recipe.appliance];
+const getDataForFiltre = (recipes)=>{
+  const dataFiltre = recipes.reduce((acc,recipe)=>{
+    // get ingredients
+    recipe.ingredients.forEach((ele)=>{
+      if(!acc[0].Ingrédients.includes(ele.ingredient)){
+        acc[0].Ingrédients = [...acc[0].Ingrédients,ele.ingredient];}
+    })
+    //  get appliances
+    if(!acc[1].Appareils.includes(recipe.appliance)){
+      acc[1].Appareils=[...acc[1].Appareils,recipe.appliance];
+    };
+    // get ustensile
+    recipe.ustensils.forEach((ustensil)=>{
+      if(!acc[2].Ustensiles.includes(ustensil)){
+        acc[2].Ustensiles = [...acc[2].Ustensiles,ustensil];
       };
-      // get ustensile
-      recipe.ustensils.forEach((ustensil)=>{
-        if(!acc[2].Ustensiles.includes(ustensil)){
-          acc[2].Ustensiles = [...acc[2].Ustensiles,ustensil];
-        };
-      })
-    return acc;
-    },[{Ingrédients:[]},{Appareils:[]},{Ustensiles:[]}]);
-    console.log(dataFiltre);
-    return dataFiltre;
-  }
+    })
+  return acc;
+  },[{Ingrédients:[]},{Appareils:[]},{Ustensiles:[]}]);
+  return dataFiltre;
+}
 
-  const updateNbrTotalResults = (data)=>{
-    const div = document.querySelector('.filtre_nbrRecettes');
-    div.innerHTML = `${data.length} recettes`;
-  }
+const updateNbrTotalResults = (data)=>{
+  const div = document.querySelector('.filtre_nbrRecettes');
+  div.innerHTML = `${data.length} recettes`;
+}
 
 // vue
 
@@ -37,6 +36,7 @@ const displaySearchBarPrincipale = ()=>{
   searchBarPrincipale.querySelector('.searchBar_xClose').classList.add('searchBar_xClose-principale');
   const inputEle =   searchBarPrincipale.querySelector('.searchBar_input');
   inputEle.setAttribute('placeholder','Rechercher une recette, un ingrédient...');
+  inputEle.setAttribute('id','inputSearchPrincipale');
 
   const searchPrincipale = document.querySelector('.header_search');
   searchPrincipale.appendChild(searchBarPrincipale);
@@ -69,9 +69,10 @@ const displayFiltre =(dataFiltre)=>{
   const optionsEle = document.createElement('ul');
   optionsEle.classList.add('filtre_category_options');
 
+
   options.forEach((element) => {
     const liOption = document.createElement('li');
-    liOption.classList.add('filtre_category_option')
+    liOption.classList.add('filtre_category_option');
     liOption.innerHTML= `${element}<i class="fa-solid fa-xmark"></i>`;
     optionsEle.appendChild(liOption);
   });
@@ -82,7 +83,10 @@ const displayFiltre =(dataFiltre)=>{
   // tag 
   const tagEles = document.createElement('ul');
   tagEles.classList.add('filtre_category_tags');
-  tagEles.innerHTML =`<li class="filtre_category_tag">option 1 <span><i class="fa-solid fa-xmark"></i> </span></li>`;
+  tagEles.setAttribute('data-category',category);
+  tagEles.innerHTML =`<li class="filtre_category_tag">option 1<span><i class="fa-solid fa-xmark"></i> </span></li> 
+  <li class="filtre_category_tag">option 2 <span><i class="fa-solid fa-xmark"></i> </span></li>
+  <li class="filtre_category_tag">option 3 <span><i class="fa-solid fa-xmark"></i> </span></li>`;
 
   divSticky.appendChild(nameCategory);
   divSticky.appendChild(searchFiltre);
@@ -102,7 +106,6 @@ const displayRecettes = (recipes)=>{
     div.appendChild(recetteCard);
     container.appendChild(div);
   });
-
 }
 
 
@@ -123,3 +126,5 @@ const init = ()=>{
 
 
 init();
+
+
