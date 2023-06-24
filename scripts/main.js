@@ -18,7 +18,26 @@ const getDataForFiltre = (recipes)=>{
     })
   return acc;
   },[{Ingrédients:[]},{Appareils:[]},{Ustensiles:[]}]);
+
   return dataFiltre;
+}
+
+const getSearchAvanceInfos = ()=>{
+  const tagUl = document.querySelectorAll('.filtre_category_tagsSelected');
+  const tag = [...tagUl].reduce((acc,ul)=>{
+    const category = ul.getAttribute('data-category');
+    const tagLi = ul.querySelectorAll('.filtre_category_tagSelected');
+    console.log(tagLi);
+    const option = [...tagLi].reduce((acc, li)=>{
+      if(!acc.includes(li.textContent)){
+        acc= [...acc,li.textContent];
+      }
+       return acc}
+      ,[]);
+    acc = {...acc,[category]:option};
+    return acc
+    },{});
+  return {...tag};
 }
 
 const updateNbrTotalResults = (data)=>{
@@ -84,6 +103,7 @@ const displayFiltre =(dataFiltre)=>{
   // tag 
   const tagEles = document.createElement('ul');
   tagEles.classList.add('filtre_category_tagsSelected');
+  tagEles.setAttribute('data-category',category);
 
   divSticky.appendChild(nameCategory);
   divSticky.appendChild(searchFiltre);
@@ -95,6 +115,7 @@ const displayFiltre =(dataFiltre)=>{
 
 const displayRecettes = (recipes)=>{
   const container = document.querySelector('.recettes');
+  container.innerHTML='';
   recipes.forEach((recette)=>{
     const div = document.createElement('div');
     div.classList.add('col-sm-6','col-md-4');
@@ -109,9 +130,41 @@ const displayRecettes = (recipes)=>{
 // control
 
 const resetFiltre = (recipes)=>{
+  const filtreSection = document.querySelector('.filtre_section');
+  filtreSection.innerHTML='';
   const data = getDataForFiltre(recipes);
   data.forEach(category=>displayFiltre(category));
 }
+
+const updateResults = (results)=>{
+    // resetFiltre(results);
+    displayRecettes(results);
+    updateNbrTotalResults(results);
+}
+
+const doSearch = ()=>{
+  const data = recipes;
+  const infosPrincipale = document.querySelector('#inputSearchPrincipale').value;
+  const infosDetails = getSearchAvanceInfos();
+  let newData;
+  if(infosPrincipale.length>=3){
+    newData = fetch(infosPrincipale,infosDetails,data);
+  }else{
+    newData = fetch('',infosDetails,data);
+  }
+  updateResults(newData);
+}
+
+
+const searchPrincipale = ()=>{
+  const inputSearchPrincipale = document.querySelector('#inputSearchPrincipale');
+  inputSearchPrincipale.addEventListener('input',(event)=>{
+    const inputValue = event.target.value;
+    doSearch();
+  });
+
+}
+
 
 
 const init = ()=>{
@@ -119,12 +172,13 @@ const init = ()=>{
   resetFiltre(recipes);
   displayRecettes(recipes);
   updateNbrTotalResults(recipes);
-
   const filtreNode = document.querySelector('.filtre_section');
   const FiltreObj = new FiltreGestion(filtreNode);
+  searchPrincipale();
 }
 
 
 init();
+
 
 

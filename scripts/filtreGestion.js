@@ -75,6 +75,7 @@ class FiltreGestion {
       this.activeSelectedOption(ele);
       this.closeFiltre(ele.parentNode.parentNode);
     }
+    doSearch();
   }
 
   onClickTagSelected = (event)=>{
@@ -82,9 +83,10 @@ class FiltreGestion {
     if(target.classList.contains('fa-xmark')){
       const selectedOption = target.closest('.filtre_category_tagSelected');
       const restoredOption = this.restoreOption(selectedOption);
-      this.hideOption(selectedOption);
+      selectedOption.remove();
       this.unselectOption(restoredOption);
       this.showOption(restoredOption);
+      doSearch();
     }
   }
 
@@ -138,7 +140,7 @@ class FiltreGestion {
     const optionsUL = ele.parentNode;
     const tagsSelectedUL = optionsUL.nextSibling;
     const tagSelectedLi = document.createElement('li');
-    tagSelectedLi.innerHTML = `<li class="filtre_category_tagSelected">${ele.textContent}<span><i class="fa-solid fa-xmark"></i> </span></li>`;
+    tagSelectedLi.innerHTML = `<li class="filtre_category_tagSelected">${ele.textContent}<span><i class="fa-solid fa-xmark"></i></span></li>`;
     tagsSelectedUL.appendChild(tagSelectedLi);
   }
 
