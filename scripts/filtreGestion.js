@@ -75,7 +75,7 @@ class FiltreGestion {
       this.activeSelectedOption(ele);
       this.closeFiltre(ele.parentNode.parentNode);
     }
-    doSearch();
+    search();
   }
 
   onClickTagSelected = (event)=>{
@@ -86,7 +86,7 @@ class FiltreGestion {
       selectedOption.remove();
       this.unselectOption(restoredOption);
       this.showOption(restoredOption);
-      doSearch();
+      search();
     }
   }
 

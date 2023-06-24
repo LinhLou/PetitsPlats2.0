@@ -27,7 +27,6 @@ const getSearchAvanceInfos = ()=>{
   const tag = [...tagUl].reduce((acc,ul)=>{
     const category = ul.getAttribute('data-category');
     const tagLi = ul.querySelectorAll('.filtre_category_tagSelected');
-    console.log(tagLi);
     const option = [...tagLi].reduce((acc, li)=>{
       if(!acc.includes(li.textContent)){
         acc= [...acc,li.textContent];
@@ -61,56 +60,114 @@ const displaySearchBarPrincipale = ()=>{
   searchPrincipale.appendChild(searchBarPrincipale);
 }
 
-const displayFiltre =(dataFiltre)=>{
-  const category = Object.keys(dataFiltre);
-  const options = dataFiltre[category];
+// const displayFiltre =(dataFiltre)=>{
+//   const category = Object.keys(dataFiltre);
+//   const options = dataFiltre[category];
 
+//   const filtreSection = document.querySelector('.filtre_section');
+//   const filtreCategory = document.createElement('div');
+//   filtreCategory.classList.add( 'filtre_category');
+//   const div = document.createElement('div');
+//   div.classList.add('col-sm-9','col-md-6','col-lg-4','col-xl-3');
+
+//   div.appendChild(filtreCategory);
+//   // caterogy
+//   const nameCategory = document.createElement('div');
+//   nameCategory.classList.add('filtre_category_name')
+//   nameCategory.innerHTML =`${category} <span><i class="fa-solid fa-chevron-down"></i></span>`;
+
+//   // search
+//   const searchBarObj = new SearchBarFactory();
+//   const searchBarFiltre = searchBarObj.createSearchBar();
+//   const searchFiltre = document.createElement('div');
+//   searchFiltre.classList.add('filtre_category_search');
+//   searchFiltre.appendChild(searchBarFiltre);
+
+//   // options
+//   const optionsEle = document.createElement('ul');
+//   optionsEle.classList.add('filtre_category_options');
+
+
+//   options.forEach((element) => {
+//     const liOption = document.createElement('li');
+//     liOption.setAttribute('data-selected',false);
+//     liOption.classList.add('filtre_category_option');
+//     liOption.innerHTML= `${element}`;
+//     optionsEle.appendChild(liOption);
+//   });
+//   const divSticky = document.createElement('div');
+//   divSticky.classList.add('filtre_category_sticky');
+
+
+//   // tag 
+//   const tagEles = document.createElement('ul');
+//   tagEles.classList.add('filtre_category_tagsSelected');
+//   tagEles.setAttribute('data-category',category);
+
+//   divSticky.appendChild(nameCategory);
+//   divSticky.appendChild(searchFiltre);
+//   filtreCategory.appendChild(divSticky);
+//   filtreCategory.appendChild(optionsEle);
+//   filtreCategory.appendChild(tagEles);
+//   filtreSection.appendChild(div);
+// }
+
+const displayFiltre =()=>{
   const filtreSection = document.querySelector('.filtre_section');
-  const filtreCategory = document.createElement('div');
-  filtreCategory.classList.add( 'filtre_category');
-  const div = document.createElement('div');
-  div.classList.add('col-sm-9','col-md-6','col-lg-4','col-xl-3');
+  filtreSection.innerHTML='';
+  const data = getDataForFiltre(recipes);
+  data.forEach(ele=>{
+    const category = Object.keys(ele);
+    const options = ele[category];
+    const filtreCategory = document.createElement('div');
+    filtreCategory.classList.add( 'filtre_category');
+    const div = document.createElement('div');
+    div.classList.add('col-sm-9','col-md-6','col-lg-4','col-xl-3');
 
-  div.appendChild(filtreCategory);
-  // caterogy
-  const nameCategory = document.createElement('div');
-  nameCategory.classList.add('filtre_category_name')
-  nameCategory.innerHTML =`${category} <span><i class="fa-solid fa-chevron-down"></i></span>`;
+    div.appendChild(filtreCategory);
+    // caterogy
+    const nameCategory = document.createElement('div');
+    nameCategory.classList.add('filtre_category_name')
+    nameCategory.innerHTML =`${category} <span><i class="fa-solid fa-chevron-down"></i></span>`;
 
-  // search
-  const searchBarObj = new SearchBarFactory();
-  const searchBarFiltre = searchBarObj.createSearchBar();
-  const searchFiltre = document.createElement('div');
-  searchFiltre.classList.add('filtre_category_search');
-  searchFiltre.appendChild(searchBarFiltre);
+    // search
+    const searchBarObj = new SearchBarFactory();
+    const searchBarFiltre = searchBarObj.createSearchBar();
+    const searchFiltre = document.createElement('div');
+    searchFiltre.classList.add('filtre_category_search');
+    searchFiltre.appendChild(searchBarFiltre);
 
-  // options
-  const optionsEle = document.createElement('ul');
-  optionsEle.classList.add('filtre_category_options');
+    // options
+    const optionsEle = document.createElement('ul');
+    optionsEle.classList.add('filtre_category_options');
 
 
-  options.forEach((element) => {
-    const liOption = document.createElement('li');
-    liOption.setAttribute('data-selected',false);
-    liOption.classList.add('filtre_category_option');
-    liOption.innerHTML= `${element}`;
-    optionsEle.appendChild(liOption);
+    options.forEach((element) => {
+      const liOption = document.createElement('li');
+      liOption.setAttribute('data-selected',false);
+      liOption.classList.add('filtre_category_option');
+      liOption.innerHTML= `${element}`;
+      optionsEle.appendChild(liOption);
+    });
+    const divSticky = document.createElement('div');
+    divSticky.classList.add('filtre_category_sticky');
+
+
+    // tag 
+    const tagEles = document.createElement('ul');
+    tagEles.classList.add('filtre_category_tagsSelected');
+    tagEles.setAttribute('data-category',category);
+
+    divSticky.appendChild(nameCategory);
+    divSticky.appendChild(searchFiltre);
+    filtreCategory.appendChild(divSticky);
+    filtreCategory.appendChild(optionsEle);
+    filtreCategory.appendChild(tagEles);
+    filtreSection.appendChild(div);
   });
-  const divSticky = document.createElement('div');
-  divSticky.classList.add('filtre_category_sticky');
 
 
-  // tag 
-  const tagEles = document.createElement('ul');
-  tagEles.classList.add('filtre_category_tagsSelected');
-  tagEles.setAttribute('data-category',category);
-
-  divSticky.appendChild(nameCategory);
-  divSticky.appendChild(searchFiltre);
-  filtreCategory.appendChild(divSticky);
-  filtreCategory.appendChild(optionsEle);
-  filtreCategory.appendChild(tagEles);
-  filtreSection.appendChild(div);
+  
 }
 
 const displayRecettes = (recipes)=>{
@@ -129,20 +186,34 @@ const displayRecettes = (recipes)=>{
 
 // control
 
-const resetFiltre = (recipes)=>{
-  const filtreSection = document.querySelector('.filtre_section');
-  filtreSection.innerHTML='';
-  const data = getDataForFiltre(recipes);
-  data.forEach(category=>displayFiltre(category));
+const updateFiltre = (data)=>{
+  newData = getDataForFiltre(data);
+  const optionsCategory = [...document.querySelectorAll('.filtre_category_name')];
+  newData.forEach(element=>{
+    const category = Object.keys(element);
+    const options = element[category];
+    const categoryName = optionsCategory.filter(ele=>ele.textContent.includes(category));
+    const optionsUL = categoryName[0].closest('.filtre_category').querySelector('.filtre_category_options');
+    optionsUL.innerHTML='';
+    options.forEach((element) => {
+      const liOption = document.createElement('li');
+      liOption.setAttribute('data-selected',false);
+      liOption.classList.add('filtre_category_option');
+      liOption.innerHTML= `${element}`;
+      optionsUL.appendChild(liOption);
+    });
+
+  })
 }
+
 
 const updateResults = (results)=>{
-    // resetFiltre(results);
-    displayRecettes(results);
-    updateNbrTotalResults(results);
+  displayRecettes(results);
+  updateFiltre(results);
+  updateNbrTotalResults(results);
 }
 
-const doSearch = ()=>{
+const search = ()=>{
   const data = recipes;
   const infosPrincipale = document.querySelector('#inputSearchPrincipale').value;
   const infosDetails = getSearchAvanceInfos();
@@ -156,11 +227,11 @@ const doSearch = ()=>{
 }
 
 
-const searchPrincipale = ()=>{
+const launchSearchPrincipale = ()=>{
   const inputSearchPrincipale = document.querySelector('#inputSearchPrincipale');
   inputSearchPrincipale.addEventListener('input',(event)=>{
     const inputValue = event.target.value;
-    doSearch();
+    search();
   });
 
 }
@@ -169,12 +240,12 @@ const searchPrincipale = ()=>{
 
 const init = ()=>{
   displaySearchBarPrincipale();
-  resetFiltre(recipes);
+  displayFiltre();
   displayRecettes(recipes);
   updateNbrTotalResults(recipes);
   const filtreNode = document.querySelector('.filtre_section');
   const FiltreObj = new FiltreGestion(filtreNode);
-  searchPrincipale();
+  launchSearchPrincipale();
 }
 
 
