@@ -1,16 +1,42 @@
 fetch = (input,infosAvance,data)=>{
   const wordInput = input;
   const {Ingrédients, Appareils, Ustensiles} = infosAvance;
-  const results = data.filter((recipe)=>{
-    const name = recipe.name;
-    const description = recipe.description;
-    const ingre = recipe.ingredients.reduce((acc,ele)=>{acc=[...acc,ele.ingredient]; return acc;},[]);
-    const appli = recipe.appliance;
-    const usten = recipe.ustensils;
+  let results = [];
+  for(let i=0; i<data.length; i++){
+    const name = data[i].name;
+    const description = data[i].description;
+    const appli = data[i].appliance;
+    const usten = data[i].ustensils;
+    let ingre = [];
+    for(let j=0;j<data[i].ingredients.length;j++){
+      ingre = [...ingre,data[i].ingredients[j].ingredient];
+    }
 
-    return (name.includes(wordInput)||description.includes(wordInput)||ingre.includes(wordInput))&&(Appareils.every(i=>appli.includes(i)))&&(Ustensiles.every(i=>usten.includes(i)))&&(Ingrédients.every(i=>ingre.includes(i)));
+    let ingreValid = true;
+    for(let i=0;i<Ingrédients.length;i++){
+      if(!ingre.includes(Ingrédients[i])){
+        ingreValid = false;
+      }
+    }
 
-  });
+    let appliValid = true;
+    for(let i=0;i<Appareils.length;i++){
+      if(!appli.includes(Appareils[i])){
+        appliValid = false;
+      }
+    }
+
+    let ustenValid = true;
+    for(let i=0;i<Ustensiles.length;i++){
+      if(!usten.includes(Ustensiles[i])){
+        ustenValid = false;
+      }
+    }
+    if((name.includes(wordInput)||description.includes(wordInput)||ingre.includes(wordInput))&&(ingreValid)&&(appliValid)&&(ustenValid)){
+      results =  [...results,data[i]];
+    }
+  }
+  console.log(results);
   return results;
 }
  
