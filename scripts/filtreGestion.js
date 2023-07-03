@@ -127,7 +127,6 @@ class FiltreGestion {
     }
   }
 
-
   selectOption = (ele)=>{
     ele.setAttribute('data-selected',true);
   }
