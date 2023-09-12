@@ -34,11 +34,11 @@ class SearchPrincipaleGestion {
     const infosDetails = getSearchAvanceInfos();
     let newData;
     if (infosPrincipale.length >= 3) {
-      newData = fetch(infosPrincipale, infosDetails, this.data);
-      const recipesForFiltre = fetch(infosPrincipale, { Ingrédients: [], Appareils: [], Ustensiles: [] }, this.data);
+      newData = searchEngine(infosPrincipale, infosDetails, this.data);
+      const recipesForFiltre = searchEngine(infosPrincipale, { Ingrédients: [], Appareils: [], Ustensiles: [] }, this.data);
       localStorage.setItem('resultSearchPrincipale', JSON.stringify(recipesForFiltre));
     } else {
-      newData = fetch('', infosDetails, this.data);
+      newData = searchEngine('', infosDetails, this.data);
       localStorage.setItem('resultSearchPrincipale', JSON.stringify(this.data));
     }
     updateResults(newData);
