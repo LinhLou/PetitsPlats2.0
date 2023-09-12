@@ -78,8 +78,8 @@ class FiltreGestion {
       this.hideOption(ele);
       this.activeSelectedOption(ele);
       this.closeFiltre(ele.parentNode.parentNode);
+      this.doFiltre();
     }
-    this.doFiltre();
   };
 
   onClickTagSelected = (event) => {
@@ -97,7 +97,7 @@ class FiltreGestion {
     const data = JSON.parse(localStorage.getItem('resultSearchPrincipale'));
     const infosPrincipale = document.querySelector('#inputSearchPrincipale').value;
     const infosDetails = getSearchAvanceInfos();
-    const newData = fetch(infosPrincipale, infosDetails, data);
+    const newData = searchEngine(infosPrincipale, infosDetails, data);
     updateResults(newData);
   };
 

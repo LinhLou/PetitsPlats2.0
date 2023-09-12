@@ -10,12 +10,12 @@ const getDataForFiltre = (recipes) => {
     //  get appliances
     if (!acc[1].Appareils.includes(recipe.appliance)) {
       acc[1].Appareils = [...acc[1].Appareils, recipe.appliance];
-    };
+    }
     // get ustensile
     recipe.ustensils.forEach((ustensil) => {
       if (!acc[2].Ustensiles.includes(ustensil)) {
         acc[2].Ustensiles = [...acc[2].Ustensiles, ustensil];
-      };
+      }
     });
     return acc;
   }, [{ Ingrédients: [] }, { Appareils: [] }, { Ustensiles: [] }]);

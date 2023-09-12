@@ -1,4 +1,4 @@
-fetch = (input,infosAvance,data)=>{
+searchEngine = (input,infosAvance,data)=>{
   const wordInput = input;
   const {Ingrédients, Appareils, Ustensiles} = infosAvance;
   const results = data.filter((recipe)=>{
