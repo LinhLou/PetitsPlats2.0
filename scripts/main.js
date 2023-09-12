@@ -164,7 +164,6 @@ const updateFiltre = (data) => {
 // control
 
 const updateResults = (results) => {
-  console.log(results);
   displayRecettes(results);
   updateFiltre(results);
   updateNbrTotalResults(results);
