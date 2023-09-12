@@ -19,7 +19,6 @@ class SearchPrincipaleGestion {
   };
 
   outFocusSearchBar = () => {
-    console.log(document.activeElement);
     if (document.activeElement === this.inputSearch) {
       this.xClose.style.display = "block";
     }

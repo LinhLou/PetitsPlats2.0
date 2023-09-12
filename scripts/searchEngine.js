@@ -36,7 +36,6 @@ searchEngine = (input,infosAvance,data)=>{
       results =  [...results,data[i]];
     }
   }
-  console.log(results);
   return results;
 }
  
